@@ -278,6 +278,7 @@ module "project_compute_iam_bindings" {
     ]
     "roles/spanner.databaseUser" = [
       "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
     ]
     "roles/spanner.viewer" = [
       "group:${var.group_name_admin}",

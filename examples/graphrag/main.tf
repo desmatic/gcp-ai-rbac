@@ -1,4 +1,4 @@
-module "cloud-nat" {
+module "graphrag" {
   source              = "../../modules/graphrag"
   project_id          = var.project_id
   application_name    = var.application_name
