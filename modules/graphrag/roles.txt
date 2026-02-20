@@ -66,6 +66,10 @@ module "project_compute_iam_bindings" {
       "group:${var.group_name_admin}",
       "group:${var.group_name_user}",
     ]
+    "roles/cloudasset.viewer" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
     "roles/cloudbuild.builds.editor" = [
       "group:${var.group_name_admin}",
       "group:${var.group_name_user}",
@@ -114,6 +118,10 @@ module "project_compute_iam_bindings" {
       "group:${var.group_name_user}",
     ]
     "roles/cloudsql.studioUser" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/compute.viewer" = [
       "group:${var.group_name_admin}",
       "group:${var.group_name_user}",
     ]
@@ -206,6 +214,14 @@ module "project_compute_iam_bindings" {
       "serviceAccount:${google_service_account.backend.email}",
       "serviceAccount:${google_service_account.middle.email}",
       "serviceAccount:${google_service_account.frontend.email}"
+    ]
+    "roles/monitoring.dashboardEditor" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/monitoring.editor" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
     ]
     "roles/monitoring.metricWriter" = [
       "group:${var.group_name_admin}",
