@@ -223,7 +223,7 @@ module "project_compute_iam_bindings" {
     "roles/pubsub.publisher" = [
       "group:${var.group_name_admin}",
       "group:${var.group_name_user}",
-      "serviceAccount:${data.google_storage_project_service_account.project.email_address}",
+      "serviceAccount:${data.google_storage_project_service_account.project_compute.email_address}",
       "serviceAccount:${google_service_account.cloudbuild.email}",
       "serviceAccount:${google_service_account.scheduler.email}",
       "serviceAccount:${google_service_account.workflows.email}",
