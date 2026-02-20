@@ -1,0 +1,307 @@
+module "project_compute_iam_bindings" {
+  source = "terraform-google-modules/iam/google//modules/projects_iam"
+  mode   = "additive"
+  projects = [
+    data.google_project.project_compute.project_id,
+  ]
+  bindings = {
+    "roles/aiplatform.admin" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "serviceAccount:${google_service_account.cloudbuild.email}",
+      "serviceAccount:${google_service_account.scheduler.email}",
+      "serviceAccount:${google_service_account.workflows.email}",
+      "serviceAccount:${google_service_account.backend.email}",
+    ]
+    "roles/aiplatform.colabEnterpriseUser" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/artifactregistry.createOnPushWriter" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "serviceAccount:${google_service_account.cloudbuild.email}",
+    ]
+    "roles/artifactregistry.reader" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "serviceAccount:${google_service_account.cloudbuild.email}",
+      "serviceAccount:${google_service_account.scheduler.email}",
+      "serviceAccount:${google_service_account.workflows.email}",
+      "serviceAccount:${google_service_account.backend.email}",
+      "serviceAccount:${google_service_account.middle.email}",
+      "serviceAccount:${google_service_account.frontend.email}"
+    ]
+    "roles/bigquery.connectionUser" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "serviceAccount:${google_service_account.cloudbuild.email}",
+      "serviceAccount:${google_service_account.scheduler.email}",
+      "serviceAccount:${google_service_account.workflows.email}",
+      "serviceAccount:${google_service_account.backend.email}",
+      "serviceAccount:${google_service_account.middle.email}",
+      "serviceAccount:${google_service_account.frontend.email}"
+    ]
+    # todo: harden
+    # this is required for a dumb neo4j google dataflow template 
+    # that doesn't support temp datasets namespace
+    "roles/bigquery.dataEditor" = [
+      "serviceAccount:${google_service_account.backend.email}",
+    ]
+    "roles/bigquery.jobUser" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "serviceAccount:${google_service_account.cloudbuild.email}",
+      "serviceAccount:${google_service_account.scheduler.email}",
+      "serviceAccount:${google_service_account.workflows.email}",
+      "serviceAccount:${google_service_account.backend.email}",
+      "serviceAccount:${google_service_account.middle.email}",
+      "serviceAccount:${google_service_account.frontend.email}"
+    ]
+    "roles/bigquery.studioUser" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/cloudaicompanion.user" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/cloudbuild.builds.editor" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/cloudfunctions.admin" = [
+      "group:${var.group_name_admin}",
+    ]
+    "roles/cloudfunctions.developer" = [
+      "group:${var.group_name_user}",
+    ]
+    "roles/cloudscheduler.admin" = [
+      "group:${var.group_name_admin}",
+    ]
+    "roles/cloudfunctions.admin" = [
+      "group:${var.group_name_admin}",
+    ]
+    "roles/cloudfunctions.developer" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/cloudfunctions.invoker" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "serviceAccount:${google_service_account.cloudbuild.email}",
+      "serviceAccount:${google_service_account.scheduler.email}",
+      "serviceAccount:${google_service_account.workflows.email}",
+      "serviceAccount:${google_service_account.backend.email}",
+      "serviceAccount:${google_service_account.middle.email}",
+      "serviceAccount:${google_service_account.frontend.email}"
+    ]
+    "roles/cloudsql.client" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "serviceAccount:${google_service_account.cloudbuild.email}",
+      "serviceAccount:${google_service_account.scheduler.email}",
+      "serviceAccount:${google_service_account.workflows.email}",
+      "serviceAccount:${google_service_account.backend.email}",
+      "serviceAccount:${google_service_account.middle.email}",
+      "serviceAccount:${google_service_account.frontend.email}"
+    ]
+    "roles/cloudsql.editor" = [
+      "serviceAccount:${google_service_account.workflows.email}",
+    ]
+    "roles/cloudsql.instanceUser" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/cloudsql.studioUser" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/compute.osAdminLogin" = [
+      "group:${var.group_name_admin}",
+    ]
+    "roles/compute.osLogin" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/dataflow.admin" = [
+      "group:${var.group_name_admin}",
+      "serviceAccount:${google_service_account.backend.email}",
+    ]
+    "roles/dataflow.worker" = [
+      "group:${var.group_name_admin}",
+      "serviceAccount:${google_service_account.backend.email}",
+    ]
+    "roles/dataform.admin" = [
+      "group:${var.group_name_admin}",
+    ]
+    "roles/dataproc.admin" = [
+      "group:${var.group_name_admin}",
+    ]
+    "roles/datastore.indexAdmin" = [
+      "group:${var.group_name_admin}",
+    ]
+    "roles/datastore.viewer" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/dialogflow.admin" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/discoveryengine.admin" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/documentai.editor" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/iap.httpsResourceAccessor" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "group:${var.group_name_iap}",
+    ]
+    "roles/iap.tunnelResourceAccessor" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/logging.logWriter" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "serviceAccount:${google_service_account.cloudbuild.email}",
+      "serviceAccount:${google_service_account.scheduler.email}",
+      "serviceAccount:${google_service_account.workflows.email}",
+      "serviceAccount:${google_service_account.backend.email}",
+      "serviceAccount:${google_service_account.middle.email}",
+      "serviceAccount:${google_service_account.frontend.email}"
+    ]
+    "roles/logging.privateLogViewer" = [
+      "group:${var.group_name_admin}",
+    ]
+    "roles/mapsadmin.admin" = [
+      "group:${var.group_name_admin}",
+      "serviceAccount:${google_service_account.backend.email}",
+    ]
+    "roles/mapsplatformdatasets.admin" = [
+      "group:${var.group_name_admin}",
+      "serviceAccount:${google_service_account.backend.email}",
+    ]
+    "roles/mapsplatformdatasets.viewer" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "serviceAccount:${google_service_account.cloudbuild.email}",
+      "serviceAccount:${google_service_account.scheduler.email}",
+      "serviceAccount:${google_service_account.workflows.email}",
+      "serviceAccount:${google_service_account.backend.email}",
+      "serviceAccount:${google_service_account.middle.email}",
+      "serviceAccount:${google_service_account.frontend.email}"
+    ]
+    "roles/mcp.toolUser" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "serviceAccount:${google_service_account.cloudbuild.email}",
+      "serviceAccount:${google_service_account.scheduler.email}",
+      "serviceAccount:${google_service_account.workflows.email}",
+      "serviceAccount:${google_service_account.backend.email}",
+      "serviceAccount:${google_service_account.middle.email}",
+      "serviceAccount:${google_service_account.frontend.email}"
+    ]
+    "roles/monitoring.metricWriter" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "serviceAccount:${google_service_account.cloudbuild.email}",
+      "serviceAccount:${google_service_account.scheduler.email}",
+      "serviceAccount:${google_service_account.workflows.email}",
+      "serviceAccount:${google_service_account.backend.email}",
+      "serviceAccount:${google_service_account.middle.email}",
+      "serviceAccount:${google_service_account.frontend.email}"
+    ]
+    "roles/pubsub.admin" = [
+      "group:${var.group_name_admin}",
+    ]
+    "roles/pubsub.publisher" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "serviceAccount:${data.google_storage_project_service_account.project.email_address}",
+      "serviceAccount:${google_service_account.cloudbuild.email}",
+      "serviceAccount:${google_service_account.scheduler.email}",
+      "serviceAccount:${google_service_account.workflows.email}",
+      "serviceAccount:${google_service_account.backend.email}",
+      "serviceAccount:${google_service_account.middle.email}",
+      "serviceAccount:${google_service_account.frontend.email}"
+    ]
+    "roles/run.admin" = [
+      "group:${var.group_name_admin}",
+    ]
+    "roles/run.developer" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/run.invoker" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "serviceAccount:${google_service_account.cloudbuild.email}",
+      "serviceAccount:${google_service_account.scheduler.email}",
+      "serviceAccount:${google_service_account.workflows.email}",
+      "serviceAccount:${google_service_account.backend.email}",
+      "serviceAccount:${google_service_account.middle.email}",
+      "serviceAccount:${google_service_account.frontend.email}"
+    ]
+    "roles/secretmanager.admin" = [
+      "group:${var.group_name_admin}",
+    ]
+    "roles/secretmanager.secretAccessor" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "serviceAccount:${google_service_account.cloudbuild.email}",
+      "serviceAccount:${google_service_account.workflows.email}",
+      "serviceAccount:${google_service_account.backend.email}",
+      "serviceAccount:${google_service_account.middle.email}",
+      "serviceAccount:${google_service_account.frontend.email}"
+    ]
+    "roles/secretmanager.viewer" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "serviceAccount:${google_service_account.cloudbuild.email}",
+      "serviceAccount:${google_service_account.workflows.email}",
+      "serviceAccount:${google_service_account.backend.email}",
+      "serviceAccount:${google_service_account.middle.email}",
+      "serviceAccount:${google_service_account.frontend.email}"
+    ]
+    "roles/serviceusage.serviceUsageViewer" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/spanner.admin" = [
+      "group:${var.group_name_admin}",
+    ]
+    "roles/spanner.databaseUser" = [
+      "group:${var.group_name_admin}",
+    ]
+    "roles/spanner.viewer" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/storage.objectUser" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "serviceAccount:${google_service_account.cloudbuild.email}",
+      "serviceAccount:${google_service_account.workflows.email}",
+      "serviceAccount:${google_service_account.backend.email}",
+      "serviceAccount:${google_service_account.middle.email}",
+      "serviceAccount:${google_service_account.frontend.email}"
+    ]
+    "roles/workflows.invoker" = [
+      "serviceAccount:${google_service_account.scheduler.email}",
+    ]
+    "roles/workstations.workstationCreator" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+    "roles/workstations.operationViewer" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+    ]
+  }
+}
