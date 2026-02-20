@@ -6,6 +6,7 @@
 
 ```bash
 cp env.local .env.local
+vim .env.local
 source .env.local
 terraform init && terraform apply
 ```
