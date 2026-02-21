@@ -165,6 +165,11 @@ module "project_compute_iam_bindings" {
       "group:${var.group_name_admin}",
       "group:${var.group_name_user}",
     ]
+    "roles/iam.securityReviewer" = [
+      "group:${var.group_name_admin}",
+      "group:${var.group_name_user}",
+      "group:${var.group_name_readonly}",
+    ]
     "roles/iap.httpsResourceAccessor" = [
       "group:${var.group_name_admin}",
       "group:${var.group_name_user}",
