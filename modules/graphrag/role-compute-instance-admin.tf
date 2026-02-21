@@ -21,7 +21,7 @@ resource "google_project_iam_custom_role" "compute_instance_admin" {
   ]
 }
 
-resource "google_project_iam_binding" "role-compute-instance-admin" {
+resource "google_project_iam_binding" "compute_instance_admin" {
   project = data.google_project.project_compute.project_id
   role    = google_project_iam_custom_role.compute_instance_admin.name
   members = [
