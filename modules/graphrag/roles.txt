@@ -165,6 +165,15 @@ module "project_compute_iam_bindings" {
       "group:${var.group_name_admin}",
       "group:${var.group_name_user}",
     ]
+    "roles/geminidataanalytics.dataAgentCreator" = [
+      "group:${var.group_name_user}",
+    ]
+    "roles/geminidataanalytics.dataAgentOwner" = [
+      "group:${var.group_name_admin}",
+    ]
+    "roles/geminidataanalytics.dataAgentOwner" = [
+      "group:${var.group_name_readonly}",
+    ]
     "roles/iam.securityReviewer" = [
       "group:${var.group_name_admin}",
       "group:${var.group_name_user}",
